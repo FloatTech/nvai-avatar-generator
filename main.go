@@ -36,7 +36,7 @@ func main() {
 			nm := d.Name()
 			fmt.Println("生成:", nm)
 			for i := 0; i < 8; i++ {
-				_, _, im, err := n.Draw(nm + ",avatar")
+				_, _, im, err := n.Draw(nm + ",1girl,looking_at_viewer,half_body,cute,bule_archive,extremely_detailed_CG_unity_8k_wallpaper,illustration,high_quality,lan")
 				if err != nil {
 					fmt.Println("ERROR:", err)
 					process.SleepAbout1sTo2s()
