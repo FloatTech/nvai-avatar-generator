@@ -1,0 +1,32 @@
+name: 生成rbp图片
+on:
+  push:
+    tags:
+      - 'r*'
+jobs:
+  genimg:
+    name: 生成rbp图片
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@master
+        with:
+          go-version: 1.19
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@master
+
+      - name: Check out rbp into repo
+        run: git clone --depth=1 https://github.com/FloatTech/ReiBot-Plugin.git repo
+
+      - name: Generate images
+        env:
+          NOVELAI_API_KEY: ${{ secrets.NOVELAI_API_KEY }}
+        run: go run main.go ./repo/plugin/ plugins
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@master
+        if: ${{ !github.head_ref }}
+        with:
+          name: *.png
+          path: plugins/

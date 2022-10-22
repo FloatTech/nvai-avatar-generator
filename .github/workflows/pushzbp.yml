@@ -1,11 +1,11 @@
-name: 生成图片
+name: 生成zbp图片
 on:
   push:
     tags:
-      - 'v*'
+      - 'z*'
 jobs:
   genimg:
-    name: 生成图片
+    name: 生成zbp图片
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go
