@@ -1,5 +1,8 @@
 name: 生成图片
-on: [ push ]
+on:
+  push:
+    tags:
+      - 'v*'
 jobs:
   genimg:
     name: 生成图片
@@ -32,3 +35,10 @@ jobs:
           git add --all
           git commit -m "生成图片"
           git push
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@master
+        if: ${{ !github.head_ref }}
+        with:
+          name: images
+          path: plugins/

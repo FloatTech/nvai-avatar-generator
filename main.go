@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"io/fs"
 	"os"
 
 	nvai "github.com/FloatTech/AnimeAPI/novelai"
+	"github.com/FloatTech/zbputils/process"
 )
 
 func main() {
@@ -32,11 +34,22 @@ func main() {
 	for _, d := range e {
 		if d.IsDir() {
 			nm := d.Name()
-			_, _, im, err := n.Draw(nm + ",avatar")
-			if err != nil {
-				panic(err)
+			fmt.Println("生成:", nm)
+			for i := 0; i < 8; i++ {
+				_, _, im, err := n.Draw(nm + ",avatar")
+				if err != nil {
+					fmt.Println("ERROR:", err)
+					process.SleepAbout1sTo2s()
+					continue
+				}
+				err = os.WriteFile(target+"/"+nm+".png", im, 0644)
+				if err != nil {
+					panic(err)
+				}
+				fmt.Println("成功")
+				process.SleepAbout1sTo2s()
+				break
 			}
-			_ = os.WriteFile(target+"/"+nm+".png", im, 0644)
 		}
 	}
 }

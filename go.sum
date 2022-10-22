@@ -2,9 +2,13 @@ github.com/FloatTech/AnimeAPI v1.5.1 h1:bMUS6sFsMjzASMnm8TcAmZ0AULnCAPgzhof2gE4x
 github.com/FloatTech/AnimeAPI v1.5.1/go.mod h1:HFQWi7BT966CxSGx6Et/weLaCApsY8FFSbbMPHqEGl0=
 github.com/FloatTech/floatbox v0.0.0-20221011153549-68005767c531 h1:Z0yn6LFhEyC12hj+TBXc2P7/kWlCd/jlwv4JFndgpnw=
 github.com/FloatTech/floatbox v0.0.0-20221011153549-68005767c531/go.mod h1:4tfIeB74L1RzhNp3nNjaTw8m3IEnc+q/k6k/MhL07ks=
+github.com/FloatTech/zbputils v1.5.0 h1:mfKZ+Ye+t8eArmgR4PzhhmdwvZM5VPjLfdikyhKffSE=
+github.com/FloatTech/zbputils v1.5.0/go.mod h1:Qet1L7sDLCkYectR0cwtTA9yDcW1n4/U1JvnAq2X18A=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/fumiama/cron v1.3.0 h1:ZWlwuexF+HQHl3cYytEE5HNwD99q+3vNZF1GrEiXCFo=
+github.com/fumiama/cron v1.3.0/go.mod h1:bz5Izvgi/xEUI8tlBN8BI2jr9Moo8N4or0KV8xXuPDY=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sirupsen/logrus v1.9.0 h1:trlNQbNUG3OdDrDil03MCb1H2o9nJ1x4/5LYw7byDE0=
