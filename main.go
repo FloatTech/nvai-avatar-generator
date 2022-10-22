@@ -13,8 +13,8 @@ func main() {
 		panic("nil api key")
 	}
 	p := nvai.NewDefaultPayload()
-	p.Parameters.Width = 700
-	p.Parameters.Height = 430
+	p.Parameters.Width = 768
+	p.Parameters.Height = 512
 	n := nvai.NewNovalAI(key, p)
 	err := n.Login()
 	if err != nil {
@@ -32,11 +32,11 @@ func main() {
 	for _, d := range e {
 		if d.IsDir() {
 			nm := d.Name()
-			_, _, img, err := n.Draw(nm + ",avatar")
+			_, _, im, err := n.Draw(nm + ",avatar")
 			if err != nil {
 				panic(err)
 			}
-			_ = os.WriteFile(target+"/"+nm+".png", img, 0644)
+			_ = os.WriteFile(target+"/"+nm+".png", im, 0644)
 		}
 	}
 }

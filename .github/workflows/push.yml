@@ -1,8 +1,8 @@
 name: 生成图片
 on: [ push ]
 jobs:
-  golangci:
-    name: lint
+  genimg:
+    name: 生成图片
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go
