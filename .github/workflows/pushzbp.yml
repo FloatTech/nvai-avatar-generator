@@ -28,5 +28,5 @@ jobs:
         uses: actions/upload-artifact@master
         if: ${{ !github.head_ref }}
         with:
-          name: *.png
+          name: "*.png"
           path: plugins/
