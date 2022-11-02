@@ -13,7 +13,10 @@ import (
 	"github.com/FloatTech/zbputils/process"
 )
 
-var regre = regexp.MustCompile(`control.Register\("(.+)",`)
+var (
+	regre = regexp.MustCompile(`control.Register\(\n?\t*"(.+)",`)
+	regsv = regexp.MustCompile(`[sS]ervice[nN]ame = "(.+)"`)
+)
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
@@ -37,11 +40,14 @@ func main() {
 		if d.IsDir() {
 			return nil
 		}
-		data, err := os.ReadFile(path)
+		data, err := os.ReadFile(os.Args[1] + "/" + path)
 		if err != nil {
 			return err
 		}
 		for _, m := range regre.FindAllStringSubmatch(binary.BytesToString(data), -1) {
+			plugins = append(plugins, m...)
+		}
+		for _, m := range regsv.FindAllStringSubmatch(binary.BytesToString(data), -1) {
 			plugins = append(plugins, m...)
 		}
 		return nil
