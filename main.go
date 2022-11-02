@@ -45,10 +45,10 @@ func main() {
 			return err
 		}
 		for _, m := range regre.FindAllStringSubmatch(binary.BytesToString(data), -1) {
-			plugins = append(plugins, m...)
+			plugins = append(plugins, m[1:]...)
 		}
 		for _, m := range regsv.FindAllStringSubmatch(binary.BytesToString(data), -1) {
-			plugins = append(plugins, m...)
+			plugins = append(plugins, m[1:]...)
 		}
 		return nil
 	})
