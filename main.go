@@ -3,13 +3,20 @@ package main
 import (
 	"fmt"
 	"io/fs"
+	"math/rand"
 	"os"
+	"regexp"
+	"time"
 
 	nvai "github.com/FloatTech/AnimeAPI/novelai"
+	"github.com/FloatTech/floatbox/binary"
 	"github.com/FloatTech/zbputils/process"
 )
 
+var regre = regexp.MustCompile(`control.Register\("(.+)",`)
+
 func main() {
+	rand.Seed(time.Now().UnixNano())
 	key := os.Getenv("NOVELAI_API_KEY")
 	if key == "" {
 		panic("nil api key")
@@ -22,7 +29,23 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	e, err := fs.ReadDir(os.DirFS(os.Args[1]), ".")
+	plugins := []string{}
+	err = fs.WalkDir(os.DirFS(os.Args[1]), ".", func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if d.IsDir() {
+			return nil
+		}
+		data, err := os.ReadFile(path)
+		if err != nil {
+			return err
+		}
+		for _, m := range regre.FindAllStringSubmatch(binary.BytesToString(data), -1) {
+			plugins = append(plugins, m...)
+		}
+		return nil
+	})
 	if err != nil {
 		panic(err)
 	}
@@ -31,25 +54,22 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	for _, d := range e {
-		if d.IsDir() {
-			nm := d.Name()
-			fmt.Println("生成:", nm)
-			for i := 0; i < 8; i++ {
-				_, _, im, err := n.Draw(nm + ",1girl,looking_at_viewer,half_body,cute,bule_archive,extremely_detailed_CG_unity_8k_wallpaper,illustration,high_quality,lan")
-				if err != nil {
-					fmt.Println("ERROR:", err)
-					process.SleepAbout1sTo2s()
-					continue
-				}
-				err = os.WriteFile(target+"/"+nm+".png", im, 0644)
-				if err != nil {
-					panic(err)
-				}
-				fmt.Println("成功")
+	for _, nm := range plugins {
+		fmt.Println("生成:", nm)
+		for i := 0; i < 8; i++ {
+			_, _, im, err := n.Draw(nm + ",1girl,looking_at_viewer,half_body,cute,bule_archive,extremely_detailed_CG_unity_8k_wallpaper,illustration,high_quality,lan")
+			if err != nil {
+				fmt.Println("ERROR:", err)
 				process.SleepAbout1sTo2s()
-				break
+				continue
 			}
+			err = os.WriteFile(target+"/"+nm+".png", im, 0644)
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println("成功")
+			process.SleepAbout1sTo2s()
+			break
 		}
 	}
 }
