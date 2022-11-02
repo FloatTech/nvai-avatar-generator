@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	regre = regexp.MustCompile(`control.Register\(\n?\t*"(.+)",`)
+	regre = regexp.MustCompile(`.Register\(\n?\t*"(.+)",`)
 	regsv = regexp.MustCompile(`[sS]ervice[nN]ame = "(.+)"`)
 )
 
